@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arsip Resmi | KKN IDBU 04 Donosari</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Tiga Font White House (Inter, Montserrat, Playfair Display) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;700;800&family=Montserrat:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+      /* === RESET GLOBAL === */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        font-family: "Inter", sans-serif;
+        color: #333; background-color: #ffffff;
+        overflow-x: hidden; -webkit-font-smoothing: antialiased;
+      }
+
+      /* === FLOATING BUTTONS === */
+      .float-btn {
+        position: fixed; bottom: 30px; z-index: 9999; color: white; border: none; border-radius: 50px;
+        display: flex; align-items: center; justify-content: center; cursor: pointer; 
+        transition: transform 0.2s ease; height: 48px;
+      }
+      .float-btn:hover { transform: scale(1.05); }
+
+      /* Tombol Kiri (Join Now) */
+      .btn-left {
+        left: 30px; background-color: #b30000; padding: 0 24px;
+        font-family: "Playfair Display", serif;
+        font-weight: 700; font-size: 1.05rem; letter-spacing: 0.5px; text-transform: uppercase;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+      }
+      .btn-left .thin-x {
+        font-family: "Inter", sans-serif; font-weight: 300; font-size: 1.5rem; 
+        margin-right: 6px; margin-top: -3px;
+      }
+
+      /* === ANIMASI CINCIN TIPIS (HOLLOW RING PULSE) ALA WHITE HOUSE === */
+      @keyframes pulse-agenda {
+        0% {
+          box-shadow: 
+            0 4px 15px rgba(0, 0, 0, 0.3), 
+            0 0 0 0 transparent, 
+            0 0 0 1.5px rgba(139, 26, 26, 0.9);
+        }
+        100% {
+          box-shadow: 
+            0 4px 15px rgba(0, 0, 0, 0.3), 
+            0 0 0 18px transparent, 
+            0 0 0 19.5px rgba(139, 26, 26, 0); 
+        }
+      }
+
+      /* Tombol Kanan (Agenda) */
+      .btn-right {
+        right: 30px; background-color: #8b1a1a; padding: 0 24px;
+        font-family: "Playfair Display", serif; font-style: italic;
+        font-size: 1.05rem; font-weight: 600; letter-spacing: 0.5px;
+        gap: 8px;
+        animation: pulse-agenda 2.5s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .btn-right i { font-size: 1.1rem; margin-top: -2px; }
+
+      /* === OVERLAY BERSAMA === */
+      .modal-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.6); z-index: 100001;
+        opacity: 0; visibility: hidden; transition: all 0.4s ease;
+      }
+      .modal-overlay.active { opacity: 1; visibility: visible; backdrop-filter: blur(2px); }
+
+      /* === POPUP / MODAL GABUNG KKN (KIRI) === */
+      .gabung-modal {
+        position: fixed; left: -450px; 
+        width: 400px; max-width: 90vw;
+        background: #ffffff; z-index: 100002; padding: 50px 35px;
+        border-radius: 0 16px 16px 0; 
+        box-shadow: 10px 0 30px rgba(0,0,0,0.3);
+        display: flex; flex-direction: column; align-items: center; text-align: center;
+        transition: left 0.5s cubic-bezier(0.25, 1, 0.5, 1), top 0.3s, height 0.3s;
+        overflow-y: auto;
+      }
+      .gabung-modal.active { left: 0; }
+
+      .close-modal-btn {
+        position: absolute; top: 15px; right: 20px;
+        background: none; border: none; font-size: 2.2rem; color: #b30000;
+        cursor: pointer; font-family: "Inter", sans-serif; font-weight: 200;
+        line-height: 1; transition: transform 0.2s;
+      }
+      .close-modal-btn:hover { transform: scale(1.1); }
+
+      .modal-logo { height: 55px; object-fit: contain; margin-bottom: 25px; }
+      
+      .modal-title {
+        font-family: 'Playfair Display', serif; font-size: 2.5rem;
+        color: #0b1221; margin-bottom: 20px; font-weight: 500; 
+        line-height: 1.1; letter-spacing: -1px; text-transform: uppercase;
+      }
+      .modal-desc {
+        font-family: 'Inter', sans-serif; font-size: 1.05rem; color: #1f2937;
+        margin-bottom: 35px; line-height: 1.5; font-weight: 400; padding: 0 10px;
+      }
+
+      .modal-form { width: 100%; display: flex; flex-direction: column; gap: 15px; }
+      .modal-form input {
+        width: 100%; padding: 15px 20px; border: 1px solid #111111; border-radius: 50px;
+        font-family: 'Inter', sans-serif; font-size: 1rem; outline: none; text-align: center;
+        color: #111; transition: border-color 0.3s;
+      }
+      .modal-form input::placeholder { color: #888888; }
+      .modal-form input:focus { box-shadow: 0 0 5px rgba(10, 17, 40, 0.2); }
+      
+      .modal-form button {
+        width: 100%; padding: 16px; background: #b30000; color: #fff;
+        border: none; border-radius: 50px; cursor: pointer; 
+        transition: background 0.3s; display: flex; justify-content: center; align-items: center;
+      }
+      .modal-form button:hover { background: #8b0000; }
+      .modal-form button span {
+        font-family: 'Playfair Display', serif; font-size: 1.6rem; 
+        font-weight: 800; letter-spacing: -0.5px;
+        transform: scale(0.75, 1.3); 
+        transform-origin: center; display: inline-block; margin-top: 2px;
+      }
+
+      /* === MODAL AGENDA CALENDAR (KANAN) === */
+      .agenda-modal {
+        position: fixed; right: -500px; top: 0;
+        width: 450px; max-width: 100vw; height: 100vh;
+        background-color: #faf8f2; 
+        z-index: 100002; padding: 40px;
+        border-radius: 16px 0 0 16px; 
+        box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+        display: flex; flex-direction: column;
+        transition: right 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        overflow-y: auto; color: #111;
+      }
+      .agenda-modal.active { right: 0; }
+      
+      .agenda-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 25px; }
+      .agenda-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 400; color: #b30000; margin-bottom: 5px; letter-spacing: -0.5px; }
+      .agenda-subtitle { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 2px; color: #666; text-transform: uppercase; }
+      
+      .close-agenda-btn {
+        background: none; border: 1px solid #ccc; border-radius: 50%; width: 32px; height: 32px;
+        font-size: 1.2rem; color: #333; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: all 0.2s; font-family: 'Inter', sans-serif; font-weight: 300;
+      }
+      .close-agenda-btn:hover { background: #111; color: #fff; border-color: #111; }
+
+      .agenda-countdown {
+        text-align: center; padding: 15px 0; border-top: 1px solid #e0dcd0; border-bottom: 1px solid #e0dcd0;
+        font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; color: #444; margin-bottom: 25px;
+      }
+      .agenda-countdown .highlight { color: #b30000; font-size: 1.2rem; font-weight: 700; font-style: normal; margin-right: 4px; }
+
+      .agenda-month-nav {
+        display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+      }
+      .agenda-month-nav button { background: none; border: 1px solid #dcd8cc; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; color: #555; transition: 0.2s; }
+      .agenda-month-nav button:hover { background-color: #eae5d8; }
+      .agenda-month-nav .current-month { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; font-weight: 500; }
+
+      .calendar-grid {
+        display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; margin-bottom: 30px;
+        background-color: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #f0ede1;
+      }
+      .day-name { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 1px; color: #888; margin-bottom: 10px; }
+      .day { 
+        font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #bbaea0; 
+        padding: 8px 0; border-radius: 4px; position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px;
+      }
+      .day.active-day { color: #111; cursor: pointer; }
+      
+      .day.multi1 { background-color: #f3e8cb; color: #111; }
+      .day.multi2 { background-color: #dce5f2; color: #111; }
+      .day.mono { background-color: #f2e2e2; color: #111; }
+      .day.selected { border: 1px solid #111; font-weight: bold;}
+
+      .event-dot { width: 4px; height: 4px; border-radius: 50%; background-color: transparent; }
+      .day.multi1 .event-dot { background-color: #b38b36; }
+      .day.multi2 .event-dot { background-color: #3b6b9e; }
+      .day.mono .event-dot { background-color: #b33636; }
+
+      .list-title { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; color: #888; margin-bottom: 15px; text-transform: uppercase; }
+      
+      .event-card {
+        background: #fff; border: 1px solid #f0ede1; border-radius: 8px; padding: 20px; margin-bottom: 15px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.02); position: relative; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .event-card:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.06); }
+      .event-card h4 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 500; color: #111; margin-bottom: 10px; line-height: 1.2; padding-right: 80px; }
+      .event-tag { 
+        position: absolute; top: 20px; right: 20px; font-family: 'Montserrat', sans-serif; font-size: 0.55rem; font-weight: 700; letter-spacing: 1px;
+        padding: 4px 8px; border-radius: 4px; text-transform: uppercase;
+      }
+      .event-tag.multi1-tag { background-color: #f3e8cb; color: #6b521c; }
+      .event-tag.multi2-tag { background-color: #dce5f2; color: #21446b; }
+      .event-tag.mono-tag { background-color: #f2e2e2; color: #b33636; }
+      
+      .event-meta { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #666; margin-bottom: 12px; display: flex; flex-direction: column; gap: 5px; }
+      .event-meta i { width: 16px; color: #aaa; }
+      .event-desc { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #444; line-height: 1.5; }
+
+      .agenda-legend { display: flex; justify-content: center; gap: 20px; margin-top: 10px; font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 600; color: #888; letter-spacing: 1px; text-transform: uppercase; }
+      .legend-item { display: flex; align-items: center; gap: 6px; }
+      .legend-box { width: 12px; height: 12px; border-radius: 2px; }
+      .legend-box.c-multi1 { background-color: #f3e8cb; }
+      .legend-box.c-multi2 { background-color: #dce5f2; }
+      .legend-box.c-mono { background-color: #f2e2e2; }
+
+      /* === HERO SECTION === */
+      .hero {
+        height: 100vh; width: 100%;
+        background: url("kkn.jpg") center center/cover no-repeat;
+        position: relative; background-color: #1a1a1a;
+      }
+      .hero::before {
+        content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 35%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+        z-index: 1; pointer-events: none;
+      }
+
+      /* === SMART HEADER === */
+      header {
+        position: fixed; top: 0; left: 0; width: 100%; z-index: 10000;
+        transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+        background-color: transparent; color: #ffffff;
+      }
+
+      /* === TOP TICKER === */
+      .top-ticker {
+        width: 100%; background-color: #ffffff; color: #111111;
+        font-family: "Inter", sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 2px;
+        text-transform: uppercase; padding: 8px 0; overflow: hidden;
+        border-bottom: 1px solid #eaeaea; transition: all 0.3s ease;
+      }
+      .ticker-track { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+      .ticker-content { display: flex; padding-right: 20px; }
+      .ticker-content span { margin-right: 40px; }
+      @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+      .header-top { 
+        display: flex; justify-content: space-between; align-items: center; 
+        padding: 20px 40px; position: relative; 
+      }
+      
+      .header-top::after {
+        content: ""; position: absolute; bottom: 0; left: 40px; right: 40px; height: 1px;
+        background-color: rgba(255, 255, 255, 0.4); transition: background-color 0.3s, opacity 0.3s;
+      }
+
+      .menu-left {
+        display: flex; align-items: center; gap: 12px; 
+        font-family: "Montserrat", sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 2.5px;
+        cursor: pointer; text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); transition: text-shadow 0.3s;
+      }
+      .menu-icon-wrapper { display: flex; align-items: center; justify-content: center; width: 24px; }
+      .hamburger { display: flex; flex-direction: column; gap: 4px; }
+      .hamburger span {
+        display: block; width: 22px; height: 2px; background-color: currentColor;
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); transition: box-shadow 0.3s;
+      }
+
+      /* AREA LOGO */
+      .logo-box { display: flex; justify-content: center; align-items: center; text-decoration: none; }
+      .logo-img { height: 60px; object-fit: contain; filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.8)); transition: filter 0.3s ease; }
+
+      /* === SEARCH BOX === */
+      .header-search { display: flex; justify-content: flex-end; align-items: center; flex: 1; margin-right: 10px; }
+      .search-toggle {
+        display: flex; align-items: center; gap: 8px; cursor: pointer;
+        font-family: "Montserrat", sans-serif; font-size: 0.8rem; font-weight: 600;
+        letter-spacing: 2.5px; text-transform: uppercase; color: inherit;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); transition: text-shadow 0.3s;
+      }
+      .search-toggle i { font-size: 1.2rem; }
+      .search-form {
+        display: none; align-items: center; width: 220px; border-bottom: 1px solid currentColor; padding-bottom: 2px;
+      }
+      .search-form.active { display: flex; }
+      .search-form input {
+        flex: 1; background: transparent; border: none; outline: none; color: inherit;
+        font-family: "Inter", sans-serif; font-size: 0.9rem; padding: 2px 5px;
+      }
+      .search-form button {
+        background: none; border: none; color: inherit; cursor: pointer;
+        font-size: 1.1rem; padding: 0 5px; display: flex; align-items: center; transition: transform 0.2s;
+      }
+      .search-form button:hover { transform: scale(1.1); }
+
+      /* === HEADER SUB MENU === */
+      .header-sub { display: flex; justify-content: center; gap: 40px; padding: 15px 0 20px 0; transition: opacity 0.3s, height 0.3s, padding 0.3s; overflow: hidden; }
+      .header-sub a {
+        color: inherit; text-decoration: none; font-family: "Montserrat", sans-serif; 
+        font-size: 0.75rem; font-weight: 700; letter-spacing: 2px;
+        text-transform: uppercase; text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); transition: text-shadow 0.3s;
+      }
+
+      /* --- SCROLLED STATE --- */
+      header.scrolled { background-color: #ffffff; color: #111111; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); }
+      header.scrolled .header-top::after { opacity: 0; }
+      header.scrolled .menu-left, header.scrolled .header-sub a, header.scrolled .search-toggle { text-shadow: none; }
+      header.scrolled .hamburger span { box-shadow: none; }
+      header.scrolled .logo-img { filter: invert(1) drop-shadow(0px 0px 0px transparent); }
+      header.scrolled .header-sub { height: 0; padding: 0; opacity: 0; }
+      header.scrolled .top-ticker { height: 0; padding: 0; opacity: 0; border: none; }
+
+      /* === MEGA MENU === */
+      header.menu-open { background-color: #ffffff !important; color: #111111 !important; }
+      header.menu-open .menu-left, header.menu-open .header-sub a, header.menu-open .search-toggle { text-shadow: none !important; }
+      header.menu-open .hamburger span { box-shadow: none !important; }
+      header.menu-open .header-top::after { background-color: #eaeaea !important; opacity: 1 !important; }
+      header.menu-open .logo-img { filter: invert(1) drop-shadow(0px 0px 0px transparent) !important; }
+
+      .mega-menu-wrapper {
+        position: absolute; top: 100%; left: 0; width: 100%; background-color: #f4f5f5;
+        border-bottom: 1px solid #eaeaea; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        padding: 60px 40px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.4s ease;
+      }
+      header.menu-open .mega-menu-wrapper { opacity: 1; visibility: visible; transform: translateY(0); }
+      .mega-grid { display: flex; justify-content: flex-start; max-width: 1600px; margin: 0 auto; gap: 40px; }
+      .mega-col-main { display: flex; flex-direction: column; gap: 30px; min-width: 300px; }
+      .mega-col-main a {
+        text-decoration: none; color: #111; font-family: "Montserrat", sans-serif; 
+        font-weight: 700; font-size: 0.9rem; letter-spacing: 2px;
+        text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; transition: color 0.2s;
+      }
+      .mega-col-main a:hover { color: #c00000; }
+      .mega-col-main a span { font-size: 0.7rem; color: #666; }
+      .mega-divider { width: 1px; background-color: #dcdcdc; margin: 0 20px; }
+      .mega-col-sub { display: flex; flex-direction: column; gap: 25px; min-width: 250px; }
+      .mega-col-sub a {
+        text-decoration: none; color: #333; font-family: "Montserrat", sans-serif; 
+        font-weight: 600; font-size: 0.8rem; letter-spacing: 1.5px;
+        text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; transition: color 0.2s;
+      }
+      .mega-col-sub a:hover { color: #c00000; }
+      .mega-col-sub a span { font-size: 0.7rem; color: #888; }
+
+      .mega-features { display: flex; gap: 30px; margin-left: auto; }
+      .feature-card { display: flex; flex-direction: column; gap: 15px; width: 320px; cursor: pointer; }
+      .feature-card img { width: 100%; height: 250px; object-fit: cover; transition: transform 0.3s ease; }
+      .feature-card:hover img { transform: scale(1.02); }
+      .feature-caption { font-family: "Montserrat", sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; color: #111; text-transform: uppercase; }
+
+      /* === KONTEN UTAMA & ANIMASI SCROLL === */
+      .main-content { 
+        background-color: #ffffff; padding: 120px 20px; 
+        max-width: 800px; /* Dipersempit agar proporsi bacanya nyaman dan elegan layaknya dokumen rilis resmi */
+        margin: 0 auto; 
+      }
+      .content-paragraph {
+        font-family: "Inter", sans-serif; font-size: 1.05rem; color: #333333; 
+        line-height: 1.8; margin-bottom: 35px; font-weight: 400;
+        text-align: justify; /* Format Rata Kanan-Kiri yang diminta */
+      }
+      .signature-area { text-align: center; margin-top: 100px; }
+      .signature-name { font-family: "Playfair Display", serif; font-size: 3rem; color: #222222; margin-bottom: 10px; }
+      .signature-title { font-family: "Playfair Display", serif; font-size: 1.2rem; color: #555555; margin-bottom: 30px; }
+
+      .reveal-text {
+        opacity: 0; transform: translateY(40px);
+        transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      .reveal-text.active { opacity: 1; transform: translateY(0); }
+
+      /* === BANNER SEBELUM FOOTER === */
+      .pre-footer-banner {
+        width: 100%; height: 400px;
+        background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6)), url("https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=1920&auto=format&fit=crop") center center/cover no-repeat;
+        position: relative; display: flex; align-items: flex-end; justify-content: flex-end; padding: 40px;
+      }
+      .banner-text { font-family: "Montserrat", sans-serif; color: white; font-size: 0.9rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
+
+      /* === FOOTER GAYA WHITE HOUSE === */
+      footer { 
+        background-color: #0b1221; color: #ffffff; padding: 80px 40px 40px 40px; position: relative;
+      }
+      .footer-grid { 
+        display: grid; grid-template-columns: 1fr 1fr 1fr 2fr; gap: 60px; max-width: 1400px; margin: 0 auto; 
+      }
+      .footer-col h4 { 
+        font-family: "Inter", sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 3px; 
+        text-transform: uppercase; margin-bottom: 30px; 
+      }
+      .footer-col ul { list-style: none; }
+      .footer-col ul li { margin-bottom: 20px; }
+      .footer-col ul a { 
+        font-family: "Inter", sans-serif; color: #a0a5b5; text-decoration: none; font-size: 0.95rem; transition: color 0.2s; 
+      }
+      .footer-col ul a:hover { color: #ffffff; }
+
+      .subscribe-form {
+        display: flex; justify-content: space-between; align-items: center;
+        border-bottom: 1px solid #ffffff; padding-bottom: 10px; margin-bottom: 15px;
+      }
+      .subscribe-form input {
+        background: transparent; border: none; outline: none; color: #ffffff;
+        font-family: "Inter", sans-serif; font-size: 0.95rem; flex: 1;
+      }
+      .subscribe-form input::placeholder { color: #a0a5b5; }
+      .subscribe-form button {
+        background: transparent; border: none; color: #ffffff;
+        font-family: "Inter", sans-serif; font-size: 0.9rem; font-weight: 600;
+        letter-spacing: 1px; cursor: pointer; text-transform: uppercase;
+      }
+      .subscribe-help {
+        font-family: "Inter", sans-serif; font-size: 0.85rem; color: #a0a5b5;
+        display: flex; align-items: center; gap: 8px; margin-top: 15px;
+      }
+      .subscribe-help a { color: #ffffff; text-decoration: underline; }
+
+      .footer-bottom {
+        max-width: 1400px; margin: 100px auto 0 auto;
+        display: flex; justify-content: space-between; align-items: center;
+      }
+      .footer-logo-text {
+        font-family: "Playfair Display", serif; font-size: 2.2rem; font-weight: 400; 
+        letter-spacing: 1.5px; margin-left: 170px; 
+      }
+      .footer-socials {
+        display: flex; gap: 25px; font-size: 1.3rem; margin-right: 250px; 
+      }
+      .footer-socials a { color: #ffffff; transition: color 0.3s, transform 0.3s; }
+      .footer-socials a:hover { color: #c00000; transform: translateY(-3px); }
+
+      /* RESPONSIVE MOBILE */
+      @media (max-width: 1200px) { .mega-features { display: none; } }
+      @media (max-width: 900px) {
+        .header-top { padding: 20px; } .header-sub { display: none; } .header-top::after { display: none; }
+        .mega-grid { flex-direction: column; gap: 20px; }
+        .mega-divider { display: none; } .mega-menu-wrapper { padding: 30px 20px; } .header-search { display: none; }
+        
+        .gabung-modal { 
+          top: auto !important; bottom: 0 !important; left: 0 !important; width: 100%; height: 85vh !important; 
+          border-radius: 20px 20px 0 0 !important; transform: translateY(100%);
+        }
+        .gabung-modal.active { transform: translateY(0); }
+
+        .agenda-modal {
+          width: 100%; right: 0; left: 0; bottom: 0; top: auto; height: 85vh;
+          border-radius: 20px 20px 0 0; transform: translateY(100%); right: auto !important;
+        }
+        .agenda-modal.active { transform: translateY(0); right: auto !important; }
+
+        .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+        .footer-bottom { 
+          flex-direction: column; align-items: flex-start; margin-top: 60px; padding-bottom: 60px; 
+        }
+        .footer-logo-text { margin-left: 0; font-size: 1.8rem; margin-bottom: 25px; }
+        .footer-socials { margin-right: 0; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- ELEMEN POPUP MODAL & OVERLAY BERSAMA -->
+    <div class="modal-overlay" id="gabung-overlay"></div>
+    
+    <!-- MODAL 1: GABUNG KKN (KIRI) -->
+    <div class="gabung-modal" id="gabung-modal">
+        <button class="close-modal-btn" id="close-modal-btn">&times;</button>
+        <img src="logo-kiri.png" alt="Logo KKN" class="modal-logo">
+        <h2 class="modal-title">SELAMAT DATANG<br>DI ERA BARU!</h2>
+        <p class="modal-desc">Daftarkan email Anda untuk menerima kabar resmi dan pembaruan program dari Tim KKN IDBU-04.</p>
+        <form class="modal-form">
+            <input type="email" placeholder="Alamat email Anda" required>
+            <button type="submit"><span>JOIN NOW</span></button>
+        </form>
+    </div>
+
+    <!-- MODAL 2: AGENDA CALENDAR (KANAN) -->
+    <div class="agenda-modal" id="agenda-modal">
+        <div class="agenda-header">
+            <div>
+                <h2 class="agenda-title">Agenda KKN</h2>
+                <p class="agenda-subtitle">Jadwal Pengabdian Donosari</p>
+            </div>
+            <button class="close-agenda-btn" id="close-agenda-btn">&times;</button>
+        </div>
+
+        <div class="agenda-countdown">
+            <span class="highlight">25</span> hari menuju Penerjunan KKN
+        </div>
+
+        <div class="agenda-month-nav">
+            <button class="nav-btn"><i class="fa-solid fa-chevron-left"></i></button>
+            <span class="current-month">Juli 2026</span>
+            <button class="nav-btn"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+
+        <div class="calendar-grid">
+            <div class="day-name">MING</div><div class="day-name">SEN</div><div class="day-name">SEL</div>
+            <div class="day-name">RAB</div><div class="day-name">KAM</div><div class="day-name">JUM</div><div class="day-name">SAB</div>
+            
+            <!-- Tanggal Kosong / Beda Bulan -->
+            <div class="day"></div><div class="day"></div><div class="day"></div>
+            
+            <!-- Tanggal Juli 2026 -->
+            <div class="day active-day">1</div><div class="day active-day">2</div><div class="day active-day">3</div><div class="day active-day">4</div>
+            <div class="day active-day">5</div><div class="day active-day">6</div><div class="day active-day">7</div><div class="day active-day">8</div><div class="day active-day">9</div>
+            <div class="day active-day">10</div><div class="day active-day">11</div><div class="day active-day">12</div><div class="day active-day">13</div><div class="day active-day">14</div>
+            <div class="day active-day">15</div><div class="day active-day">16</div><div class="day active-day">17</div><div class="day active-day">18</div><div class="day active-day">19</div>
+            <div class="day active-day">20</div><div class="day active-day">21</div><div class="day active-day">22</div><div class="day active-day">23</div><div class="day active-day">24</div>
+            <div class="day active-day">25</div><div class="day active-day">26</div><div class="day active-day">27</div><div class="day active-day">28</div><div class="day active-day">29</div>
+            <div class="day active-day">30</div><div class="day active-day">31</div>
+        </div>
+
+        <h3 class="list-title">AGENDA KKN IDBU 04</h3>
+        
+        <!-- Pesan Placeholder Karena Agenda Dikosongkan -->
+        <p style="font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #666; text-align: center; margin: 30px 0; font-style: italic;">
+            Belum ada agenda yang dipublikasikan untuk bulan ini.
+        </p>
+
+        <div class="agenda-legend">
+            <div class="legend-item"><span class="legend-box c-mono"></span> Umum</div>
+            <div class="legend-item"><span class="legend-box c-multi1"></span> Multi 1</div>
+            <div class="legend-item"><span class="legend-box c-multi2"></span> Multi 2</div>
+        </div>
+    </div>
+
+    <!-- TOMBOL MENGAMBANG DI BAWAH -->
+    <button class="float-btn btn-left" id="btn-gabung">
+      <span class="thin-x">&times;</span> JOIN NOW
+    </button>
+    <button class="float-btn btn-right" id="btn-agenda">
+      <i class="fa-regular fa-calendar"></i> Agenda Donosari
+    </button>
+
+    <!-- HEADER SMART SCROLL & MEGA MENU -->
+    <header id="main-header">
+      <div class="top-ticker">
+        <div class="ticker-track">
+          <div class="ticker-content">
+            <span>KABAR TERKINI • PEMBARUAN LANGSUNG • DEDIKASI UNTUK MASYARAKAT DESA DONOSARI &rarr;</span>
+            <span>UNDUH ARSIP RESMI KKN SEKARANG • KABAR TERKINI • PEMBARUAN LANGSUNG &rarr;</span>
+          </div>
+          <div class="ticker-content">
+            <span>KABAR TERKINI • PEMBARUAN LANGSUNG • DEDIKASI UNTUK MASYARAKAT DESA DONOSARI &rarr;</span>
+            <span>UNDUH ARSIP RESMI KKN SEKARANG • KABAR TERKINI • PEMBARUAN LANGSUNG &rarr;</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-top" id="header-top">
+        <div style="flex: 1; display: flex;">
+          <div class="menu-left" id="menu-btn">
+            <div class="menu-icon-wrapper" id="menu-icon">
+              <div class="hamburger"><span></span><span></span><span></span></div>
+            </div>
+            <span id="menu-text">MENU</span>
+          </div>
+        </div>
+
+        <a href="#" class="logo-box" style="flex: 1;">
+          <img src="logo-kiri.png" alt="Logo KKN IDBU 04" class="logo-img" />
+        </a>
+
+        <div class="header-search">
+          <div class="search-toggle" id="search-toggle">
+            SEARCH <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <form class="search-form" id="search-form" action="berita.html" method="GET">
+            <input type="text" name="q" id="search-input" placeholder="Ketik pencarian..." required autocomplete="off">
+            <button type="submit" title="Cari"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </form>
+        </div>
+      </div>
+
+      <div class="header-sub">
+        <a href="berita.html">BERITA</a><a href="#">GALERI</a><a href="#">DOKUMENTASI</a>
+        <a href="program-kerja.html">PROGRAM KERJA</a><a href="#">PEMBERDAYAAN UMKM</a><a href="#">KONTAK</a>
+      </div>
+
+      <div class="mega-menu-wrapper">
+        <div class="mega-grid">
+          <div class="mega-col-main">
+            <a href="berita.html">BERITA <span>&#9656;</span></a>
+            <a href="laman-multidisiplin-1.html">MULTIDISIPLIN 1 <span>&#9656;</span></a>
+            <a href="laman-multidisiplin-2.html">MULTIDISIPLIN 2 <span>&#9656;</span></a>
+            <a href="#">PRIORITAS PROKER <span>&#9656;</span></a>
+            <a href="#">TENTANG KAMI <span>&#9656;</span></a>
+            <a href="#">TERLIBAT BERSAMA <span>&#9656;</span></a>
+          </div>
+          <div class="mega-divider"></div>
+          <div class="mega-col-sub">
+            <a href="#">SOROTAN <span>&#9656;</span></a><a href="#">LAPORAN & PERNYATAAN</a><a href="#">LEMBAR FAKTA</a>
+            <a href="#">AKSI MAHASISWA <span>&#9656;</span></a><a href="#">CATATAN</a><a href="#">RISET DESA</a>
+          </div>
+          <div class="mega-features">
+            <div class="feature-card">
+              <img src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?q=80&w=800&auto=format&fit=crop" alt="Kegiatan Desa" />
+              <div class="feature-caption">45 HARI PENGABDIAN</div>
+            </div>
+            <div class="feature-card">
+              <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=800&auto=format&fit=crop" alt="Peta Desa" />
+              <div class="feature-caption">PETA RESMI DONOSARI</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero"></section>
+
+    <!-- TEKS DI BAGIAN TENGAH SUDAH RATA KANAN KIRI & DIKECILKAN KOLOMNYA -->
+    <main class="main-content">
+      <p class="content-paragraph reveal-text">Di bawah pelaksanaan pengabdian masyarakat KKN IDBU 04, Desa Donosari telah memasuki era baru pemberdayaan yang komprehensif, ditandai dengan akselerasi pertumbuhan ekonomi mikro dan pendampingan legalitas usaha yang menggerakkan inovasi warga lokal.</p>
+      
+      <p class="content-paragraph reveal-text">Tim mahasiswa telah memantapkan posisi program ini sebagai katalisator perlindungan hukum masyarakat, dengan rekor partisipasi aktif warga dalam penyuluhan anti-kekerasan dan edukasi keamanan siber yang mendorong kemajuan sosial.</p>
+      
+      <p class="content-paragraph reveal-text">Di tingkat desa, kebijakan operasional yang tegas telah mengamankan hak-hak perempuan dan anak, mengurangi potensi kerawanan sosial ke tingkat terendah yang belum pernah terjadi sebelumnya, sekaligus memulihkan rasa aman warga, sementara langkah-langkah efisiensi program telah secara signifikan meningkatkan kesejahteraan keluarga.</p>
+
+      <div class="signature-area reveal-text">
+        <h2 class="signature-name">Tim KKN IDBU 04</h2>
+        <p class="signature-title">Mahasiswa Pengabdian Masyarakat Universitas</p>
+      </div>
+    </main>
+
+    <section class="pre-footer-banner">
+      <div class="banner-text">MEMBANGUN DONOSARI LEBIH BAIK</div>
+    </section>
+
+    <!-- FOOTER GAYA WHITE HOUSE -->
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>TENTANG</h4>
+          <ul>
+            <li><a href="#">Administrasi</a></li>
+            <li><a href="#">Kontak Posko</a></li>
+            <li><a href="#">Keanggotaan</a></li>
+            <li><a href="#">Program Prioritas</a></li>
+            <li><a href="#">Kebijakan Privasi</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>MEDIA</h4>
+          <ul>
+            <li><a href="#">Berita Desa</a></li>
+            <li><a href="#">Galeri Foto</a></li>
+            <li><a href="#">Pustaka Video</a></li>
+            <li><a href="#">Laporan Publikasi</a></li>
+            <li><a href="#">Arsip Dokumen</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>INISIATIF</h4>
+          <ul>
+            <li><a href="#">Pemberdayaan UMKM</a></li>
+            <li><a href="#">Edukasi NIB</a></li>
+            <li><a href="#">Perlindungan Anak</a></li>
+            <li><a href="#">Literasi Digital</a></li>
+            <li><a href="#">Inovasi Desa</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4>BERLANGGANAN BULETIN KKN</h4>
+          <form class="subscribe-form">
+            <input type="email" placeholder="Alamat email Anda" required>
+            <button type="submit">DAFTAR</button>
+          </form>
+          <div class="subscribe-help">
+            <i class="fa-solid fa-mobile-screen"></i> 
+            <span><a href="#">Klik di sini</a> atau hubungi Posko untuk pembaruan.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-logo-text">KKN IDBU-04</div>
+        <div class="footer-socials">
+          <a href="#" title="X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const header = document.getElementById("main-header");
+      const headerTop = document.getElementById("header-top");
+      const menuBtn = document.getElementById("menu-btn");
+      const menuIcon = document.getElementById("menu-icon");
+      const menuText = document.getElementById("menu-text");
+      
+      const gabungOverlay = document.getElementById("gabung-overlay");
+      const gabungModal = document.getElementById("gabung-modal");
+      const agendaModal = document.getElementById("agenda-modal");
+      const btnGabung = document.getElementById("btn-gabung");
+      const btnAgenda = document.getElementById("btn-agenda");
+      const closeModalBtn = document.getElementById("close-modal-btn");
+      const closeAgendaBtn = document.getElementById("close-agenda-btn");
+
+      // === LOGIKA POSISI MODAL DINAMIS SEJAJAR GARIS PUTIH ===
+      function updateModalPosition() {
+        if (window.innerWidth <= 900) {
+            gabungModal.style.top = ''; 
+            gabungModal.style.height = '';
+            return;
+        }
+        const rect = headerTop.getBoundingClientRect();
+        
+        gabungModal.style.top = rect.bottom + 'px';
+        gabungModal.style.height = `calc(100vh - ${rect.bottom}px)`;
+        
+        agendaModal.style.top = rect.bottom + 'px';
+        agendaModal.style.height = `calc(100vh - ${rect.bottom}px)`;
+      }
+
+      window.addEventListener('scroll', updateModalPosition);
+      window.addEventListener('resize', updateModalPosition);
+      updateModalPosition();
+
+      // Logika Mega Menu
+      menuBtn.addEventListener("click", () => {
+        header.classList.toggle("menu-open");
+        if (header.classList.contains("menu-open")) {
+          menuText.textContent = "CLOSE";
+          menuIcon.innerHTML = '<i class="fa-solid fa-xmark" style="font-size: 1.5rem;"></i>';
+        } else {
+          menuText.textContent = "MENU";
+          menuIcon.innerHTML = '<div class="hamburger"><span></span><span></span><span></span></div>';
+        }
+      });
+
+      // Buka Modal Gabung KKN (Kiri)
+      btnGabung.addEventListener("click", () => {
+        agendaModal.classList.remove("active"); 
+        gabungModal.classList.add("active");
+        gabungOverlay.classList.add("active");
+        updateModalPosition(); 
+      });
+
+      // Buka Modal Agenda (Kanan)
+      btnAgenda.addEventListener("click", () => {
+        gabungModal.classList.remove("active"); 
+        agendaModal.classList.add("active");
+        gabungOverlay.classList.add("active");
+        updateModalPosition(); 
+      });
+
+      function closeAllModals() {
+          gabungModal.classList.remove("active");
+          agendaModal.classList.remove("active");
+          gabungOverlay.classList.remove("active");
+      }
+
+      closeModalBtn.addEventListener("click", closeAllModals);
+      closeAgendaBtn.addEventListener("click", closeAllModals);
+      gabungOverlay.addEventListener("click", closeAllModals);
+
+      // Logika Scroll (Header State)
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+          
+          if (header.classList.contains("menu-open")) {
+            header.classList.remove("menu-open");
+            menuText.textContent = "MENU";
+            menuIcon.innerHTML = '<div class="hamburger"><span></span><span></span><span></span></div>';
+          }
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+
+      // Logika Pencarian
+      const searchToggle = document.getElementById("search-toggle");
+      const searchForm = document.getElementById("search-form");
+      const searchInput = document.getElementById("search-input");
+
+      searchToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        searchToggle.style.display = "none";
+        searchForm.classList.add("active");
+        searchInput.focus(); 
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!searchForm.contains(e.target) && !searchToggle.contains(e.target)) {
+          searchForm.classList.remove("active");
+          searchToggle.style.display = "flex";
+        }
+      });
+
+      // === LOGIKA ANIMASI SCROLL LOOPING ===
+      const revealElements = document.querySelectorAll(".reveal-text");
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          } else {
+            entry.target.classList.remove("active");
+          }
+        });
+      }, {
+        rootMargin: "0px 0px -10% 0px",
+        threshold: 0.1,
+      });
+
+      revealElements.forEach((el) => {
+        revealObserver.observe(el);
+      });
+    </script>
+  </body>
+</html>
