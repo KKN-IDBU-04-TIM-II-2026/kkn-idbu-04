@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multidisiplin 1 | KKN IDBU 04 Donosari</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Montserrat:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* === RESET GLOBAL === */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #111111; background-color: #ffffff;
+            overflow-x: hidden; -webkit-font-smoothing: antialiased;
+        }
+
+        /* === FLOATING BUTTON (Kiri Bawah) === */
+        .float-btn {
+            position: fixed; bottom: 30px; left: 30px; z-index: 9999;
+            color: white; border: none; border-radius: 50px;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.2s ease;
+            height: 48px; background-color: #b30000; padding: 0 24px;
+            font-family: "Playfair Display", serif; font-weight: 700; font-size: 1.05rem;
+            letter-spacing: 0.5px; text-transform: uppercase;
+        }
+        .float-btn:hover { transform: scale(1.05); }
+        .float-btn .thin-x {
+            font-family: "Inter", sans-serif; font-weight: 300; font-size: 1.5rem; 
+            margin-right: 6px; margin-top: -3px;
+        }
+
+        /* === POPUP / MODAL PANEL KIRI (FLOATING CARD) === */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); z-index: 100001;
+            opacity: 0; visibility: hidden; transition: all 0.4s ease;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; backdrop-filter: blur(2px); }
+
+        .gabung-modal {
+            position: fixed; top: 20px; left: -450px;
+            height: calc(100vh - 40px); width: 400px; max-width: 90vw;
+            background: #ffffff; z-index: 100002; padding: 50px 40px;
+            border-radius: 16px; box-shadow: 10px 10px 40px rgba(0,0,0,0.3);
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+            transition: left 0.5s cubic-bezier(0.25, 1, 0.5, 1); overflow-y: auto;
+        }
+        .gabung-modal.active { left: 20px; }
+
+        .close-modal-btn {
+            position: absolute; top: 20px; right: 25px;
+            background: none; border: none; font-size: 1.8rem; color: #b30000;
+            cursor: pointer; font-family: "Inter", sans-serif; font-weight: 300;
+            line-height: 1; transition: transform 0.2s;
+        }
+        .close-modal-btn:hover { transform: scale(1.2); }
+
+        .modal-logo { height: 60px; object-fit: contain; margin-bottom: 30px; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.1)); }
+        
+        .modal-title {
+            font-family: 'Playfair Display', serif; font-size: 2.2rem;
+            color: #0A1128; margin-bottom: 15px; font-weight: 700; line-height: 1.1; letter-spacing: -0.5px;
+        }
+        .modal-desc {
+            font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #555;
+            margin-bottom: 35px; line-height: 1.6;
+        }
+
+        .modal-form { width: 100%; display: flex; flex-direction: column; gap: 15px; }
+        .modal-form input {
+            width: 100%; padding: 14px 20px; border: 1px solid #777; border-radius: 50px;
+            font-family: 'Inter', sans-serif; font-size: 0.95rem; outline: none; text-align: center;
+            transition: border-color 0.3s;
+        }
+        .modal-form input:focus { border-color: #0A1128; box-shadow: 0 0 5px rgba(10, 17, 40, 0.2); }
+        
+        .modal-form button {
+            width: 100%; padding: 16px; background: #b30000; color: #fff;
+            border: none; border-radius: 50px; font-family: 'Playfair Display', serif;
+            font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; cursor: pointer; 
+            transition: background 0.3s;
+        }
+        .modal-form button:hover { background: #8b0000; }
+
+        /* === HEADER PUTIH FIXED (Menghilangkan celah putih) === */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background-color: #ffffff; border-bottom: 1px solid #eaeaea;
+            z-index: 10000; transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* === TOP TICKER BERJALAN === */
+        .top-ticker {
+            width: 100%; height: 36px;
+            background-color: #ffffff; color: #111111;
+            font-family: "Montserrat", sans-serif; 
+            font-size: 0.65rem; font-weight: 700; letter-spacing: 2px;
+            text-transform: uppercase; padding: 0; overflow: hidden;
+            border-bottom: 1px solid #eaeaea; transition: all 0.3s ease;
+            display: flex; align-items: center; white-space: nowrap; 
+        }
+        .ticker-track { display: flex; align-items: center; width: max-content; animation: marquee 30s linear infinite; }
+        .ticker-content { display: flex; align-items: center; padding-right: 20px; white-space: nowrap; }
+        .ticker-content span { margin-right: 40px; display: inline-block; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        .header-top {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 40px; border-bottom: 1px solid #eaeaea; position: relative;
+        }
+        .menu-left {
+            display: flex; align-items: center; gap: 12px;
+            font-family: "Montserrat", sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 2.5px;
+            cursor: pointer; color: #111; text-decoration: none;
+        }
+        .hamburger span {
+            display: block; width: 22px; height: 2px; background-color: #111; margin-bottom: 4px; transition: 0.3s;
+        }
+
+        /* AREA LOGO (GAMBAR INVERT) */
+        .logo-box {
+            text-align: center; display: flex; flex-direction: column; align-items: center; text-decoration: none;
+        }
+        .logo-img {
+            height: 45px; object-fit: contain; filter: invert(1);
+        }
+
+        /* SEARCH BOX */
+        .header-search { display: flex; justify-content: flex-end; align-items: center; }
+        .search-toggle {
+            display: flex; align-items: center; gap: 8px; font-family: "Montserrat", sans-serif; 
+            font-size: 0.8rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; 
+            cursor: pointer; transition: transform 0.2s;
+        }
+        .search-toggle i { font-size: 1.2rem; }
+        .search-form { display: none; align-items: center; width: 220px; border-bottom: 1px solid #111; padding-bottom: 2px; }
+        .search-form.active { display: flex; }
+        .search-form input { flex: 1; background: transparent; border: none; outline: none; color: #111; font-family: "Inter", sans-serif; font-size: 0.9rem; padding: 2px 5px; }
+        .search-form button { background: none; border: none; color: #111; cursor: pointer; font-size: 1.1rem; padding: 0 5px; display: flex; align-items: center; transition: transform 0.2s; }
+        .search-form button:hover { transform: scale(1.1); }
+
+        .header-sub {
+            display: flex; justify-content: center; gap: 40px; padding: 15px 0; background-color: #ffffff;
+            transition: opacity 0.3s, height 0.3s, padding 0.3s; overflow: hidden;
+        }
+        .header-sub a {
+            color: #111; text-decoration: none; font-family: "Montserrat", sans-serif; 
+            font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s;
+        }
+        .header-sub a:hover { color: #C00000; }
+
+        /* SCROLLED HEADER STATE */
+        header.scrolled { box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); }
+        header.scrolled .header-sub { height: 0; padding: 0; opacity: 0; }
+        header.scrolled .top-ticker { height: 0; padding: 0; opacity: 0; border: none; }
+
+        /* === HERO BANNER PROGRAM KERJA (NAVY BLUE) === */
+        .proker-banner {
+            /* Trik padding-top untuk menyelinap mulus di bawah header sehingga GAP-PROOF */
+            padding-top: 220px; 
+            padding-bottom: 80px; /* Padding bottom dinaikkan sedikit karena hilangnya tab di bawahnya */
+            background-color: #0b1221; color: #ffffff;
+            text-align: center; margin-top: 0;
+        }
+
+        .proker-banner h1 {
+            font-family: 'Playfair Display', serif; font-size: 5rem;
+            font-weight: 400; letter-spacing: -1px; margin-bottom: 50px;
+        }
+
+        /* Kolom Pencarian di dalam Banner */
+        .search-box-wrapper {
+            max-width: 600px; margin: 0 auto 0 auto; background-color: #ffffff;
+            display: flex; align-items: center; padding: 5px 20px; border-radius: 4px;
+        }
+        .search-box-wrapper input {
+            flex: 1; border: none; outline: none; padding: 15px 0;
+            font-family: 'Inter', sans-serif; font-size: 1rem; color: #333;
+        }
+        .search-box-wrapper button {
+            background: none; border: none; font-size: 1.2rem; color: #111; cursor: pointer;
+        }
+
+        /* === DAFTAR PROGRAM KERJA (KONTEN UTAMA) === */
+        .proker-container {
+            max-width: 900px; margin: 80px auto 60px auto; padding: 0 20px;
+        }
+
+        .proker-item {
+            margin-bottom: 40px; padding-bottom: 40px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        .proker-item:last-child { border-bottom: none; }
+
+        .proker-item h2 {
+            font-family: 'Playfair Display', serif; font-size: 2.1rem;
+            font-weight: 500; color: #111111; line-height: 1.3;
+            margin-bottom: 15px; transition: color 0.2s;
+        }
+        .proker-item h2 a { text-decoration: none; color: inherit; }
+        .proker-item h2 a:hover { color: #C00000; }
+
+        .proker-meta {
+            font-family: 'Inter', sans-serif; font-size: 0.95rem;
+            color: #555555; display: flex; align-items: center;
+        }
+        .proker-meta span.separator { margin: 0 15px; color: #cccccc; }
+
+        /* Efek Animasi Meluncur */
+        .reveal-text {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
+        }
+        .reveal-text.active { opacity: 1; transform: translateY(0); }
+
+        /* === NAVIGASI HALAMAN (PAGINATION) === */
+        .pagination {
+            display: flex; justify-content: center; align-items: center; gap: 25px;
+            margin: 80px 0; font-family: 'Montserrat', sans-serif; font-size: 0.85rem;
+            font-weight: 700; color: #888888; letter-spacing: 1px;
+        }
+        .pagination a { color: #888888; text-decoration: none; padding-top: 5px; transition: color 0.2s; }
+        .pagination a:hover { color: #111111; }
+        .pagination a.active { color: #111111; border-top: 2px solid #111111; }
+
+        /* === FOOTER GAYA WHITE HOUSE === */
+        footer { 
+            background-color: #0b1221; color: #ffffff; padding: 80px 40px 40px 40px; position: relative;
+        }
+        .footer-grid { 
+            display: grid; grid-template-columns: 1fr 1fr 1fr 2fr; gap: 60px; max-width: 1400px; margin: 0 auto; 
+        }
+        .footer-col h4 { 
+            font-family: "Montserrat", sans-serif; font-size: 0.8rem; font-weight: 700; 
+            letter-spacing: 3px; text-transform: uppercase; margin-bottom: 30px; 
+        }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 20px; }
+        .footer-col ul a { 
+            font-family: "Inter", sans-serif; color: #a0a5b5; text-decoration: none; font-size: 0.95rem; transition: color 0.2s; 
+        }
+        .footer-col ul a:hover { color: #ffffff; }
+
+        .subscribe-form {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #ffffff; padding-bottom: 10px; margin-bottom: 15px;
+        }
+        .subscribe-form input {
+            background: transparent; border: none; outline: none; color: #ffffff;
+            font-family: "Inter", sans-serif; font-size: 0.95rem; flex: 1;
+        }
+        .subscribe-form input::placeholder { color: #a0a5b5; }
+        .subscribe-form button {
+            background: transparent; border: none; color: #ffffff;
+            font-family: "Montserrat", sans-serif; font-size: 0.85rem; font-weight: 700;
+            letter-spacing: 1.5px; cursor: pointer; text-transform: uppercase;
+        }
+        .subscribe-help {
+            font-family: "Inter", sans-serif; font-size: 0.85rem; color: #a0a5b5;
+            display: flex; align-items: center; gap: 8px; margin-top: 15px;
+        }
+        .subscribe-help a { color: #ffffff; text-decoration: underline; }
+
+        .footer-bottom {
+            max-width: 1400px; margin: 100px auto 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .footer-logo-text {
+            font-family: "Playfair Display", serif; font-size: 2.2rem; font-weight: 400; 
+            letter-spacing: 1.5px; margin-left: 170px; 
+        }
+        .footer-socials {
+            display: flex; gap: 25px; font-size: 1.3rem; margin-right: 250px; 
+        }
+        .footer-socials a { color: #ffffff; transition: color 0.3s, transform 0.3s; }
+        .footer-socials a:hover { color: #c00000; transform: translateY(-3px); }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .header-top { padding: 20px; } .header-sub { display: none; }
+            .proker-banner { padding-top: 160px; } 
+            .proker-banner h1 { font-size: 3.5rem; }
+            .proker-item h2 { font-size: 1.6rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .header-search { display: none; }
+            .gabung-modal { 
+                top: auto !important; bottom: 0 !important; left: 0 !important; 
+                width: 100%; height: 85vh !important; 
+                border-radius: 20px 20px 0 0; transform: translateY(100%);
+            }
+            .gabung-modal.active { transform: translateY(0); }
+            .footer-bottom { flex-direction: column; align-items: flex-start; margin-top: 60px; padding-bottom: 60px; }
+            .footer-logo-text { margin-left: 0; font-size: 1.8rem; margin-bottom: 25px; }
+            .footer-socials { margin-right: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="modal-overlay" id="gabung-overlay"></div>
+    <div class="gabung-modal" id="gabung-modal">
+        <button class="close-modal-btn" id="close-modal-btn">&times;</button>
+        <img src="logo-kiri.png" alt="Logo KKN" class="modal-logo">
+        <h2 class="modal-title">SELAMAT DATANG<br>DI ERA BARU!</h2>
+        <p class="modal-desc">Daftarkan email Anda untuk menerima kabar resmi dan pembaruan program dari Tim KKN IDBU-04.</p>
+        <form class="modal-form">
+            <input type="email" placeholder="Alamat email Anda" required>
+            <button type="submit">JOIN NOW</button>
+        </form>
+    </div>
+
+    <button class="float-btn" id="btn-gabung">
+        <span class="thin-x">&times;</span> JOIN NOW
+    </button>
+
+    <header id="main-header">
+        <div class="top-ticker">
+            <div class="ticker-track">
+                <div class="ticker-content">
+                    <span>KABAR TERKINI • PEMBARUAN LANGSUNG • DEDIKASI UNTUK MASYARAKAT DESA DONOSARI &rarr;</span>
+                    <span>UNDUH ARSIP RESMI KKN SEKARANG • KABAR TERKINI • PEMBARUAN LANGSUNG &rarr;</span>
+                </div>
+                <div class="ticker-content">
+                    <span>KABAR TERKINI • PEMBARUAN LANGSUNG • DEDIKASI UNTUK MASYARAKAT DESA DONOSARI &rarr;</span>
+                    <span>UNDUH ARSIP RESMI KKN SEKARANG • KABAR TERKINI • PEMBARUAN LANGSUNG &rarr;</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-top">
+            <div style="flex: 1; display: flex;">
+                <a href="index.html" class="menu-left">
+                    <div class="hamburger"><span></span><span></span><span></span></div> MENU
+                </a>
+            </div>
+            
+            <a href="index.html" class="logo-box" style="flex: 1;">
+                <img src="logo-kiri.png" alt="Logo KKN IDBU 04" class="logo-img" />
+            </a>
+
+            <div class="header-search" style="flex: 1;">
+                <div class="search-toggle" id="search-toggle">
+                    SEARCH <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <form class="search-form" id="search-form" action="berita.html" method="GET">
+                    <input type="text" name="q" id="search-input" placeholder="Ketik pencarian..." required autocomplete="off">
+                    <button type="submit" title="Cari"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="header-sub">
+            <a href="berita.html">BERITA</a>
+            <a href="#">GALERI</a>
+            <a href="#">DOKUMENTASI</a>
+            <a href="program-kerja.html">PROGRAM KERJA</a>
+            <a href="#">PEMBERDAYAAN UMKM</a>
+            <a href="#">KONTAK</a>
+        </div>
+    </header>
+
+    <section class="proker-banner">
+        <h1>Multidisiplin 1</h1>
+        
+        <div class="search-box-wrapper">
+            <input type="text" placeholder="Cari Program Kerja">
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+    </section>
+
+    <main class="proker-container">
+        
+        <!-- Artikel Multidisiplin 1 (1) -->
+        <article class="proker-item reveal-text">
+            <h2><a href="detail-proker-1.html">Perlindungan Hukum dan Pemberdayaan Ekonomi Kreatif</a></h2>
+            <div class="proker-meta">
+                Multidisiplin 1 <span class="separator">|</span> Juni 14, 2026
+            </div>
+        </article>
+
+        <!-- Artikel Multidisiplin 1 (2) -->
+        <article class="proker-item reveal-text">
+            <h2><a href="#">Pendampingan Pendaftaran NIB dan Merek Dagang bagi Pelaku UMKM Donosari</a></h2>
+            <div class="proker-meta">
+                Multidisiplin 1 <span class="separator">|</span> Juni 16, 2026
+            </div>
+        </article>
+        
+        <!-- Artikel Multidisiplin 1 (3) -->
+        <article class="proker-item reveal-text">
+            <h2><a href="#">Workshop Pelatihan Digital Marketing & E-Commerce untuk Pengrajin Lokal</a></h2>
+            <div class="proker-meta">
+                Multidisiplin 1 <span class="separator">|</span> Juni 18, 2026
+            </div>
+        </article>
+
+        <div class="pagination reveal-text">
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <span>...</span>
+            <a href="#">12</a>
+            <a href="#" style="margin-left: 10px;">NEXT</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>TENTANG</h4>
+                <ul>
+                    <li><a href="#">Administrasi</a></li>
+                    <li><a href="#">Kontak Posko</a></li>
+                    <li><a href="#">Keanggotaan</a></li>
+                    <li><a href="#">Program Prioritas</a></li>
+                    <li><a href="#">Kebijakan Privasi</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>MEDIA</h4>
+                <ul>
+                    <li><a href="#">Berita Desa</a></li>
+                    <li><a href="#">Galeri Foto</a></li>
+                    <li><a href="#">Pustaka Video</a></li>
+                    <li><a href="#">Laporan Publikasi</a></li>
+                    <li><a href="#">Arsip Dokumen</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>INISIATIF</h4>
+                <ul>
+                    <li><a href="#">Pemberdayaan UMKM</a></li>
+                    <li><a href="#">Edukasi NIB</a></li>
+                    <li><a href="#">Perlindungan Anak</a></li>
+                    <li><a href="#">Literasi Digital</a></li>
+                    <li><a href="#">Inovasi Desa</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>BERLANGGANAN BULETIN KKN</h4>
+                <form class="subscribe-form">
+                    <input type="email" placeholder="Alamat email Anda" required>
+                    <button type="submit">DAFTAR</button>
+                </form>
+                <div class="subscribe-help">
+                    <i class="fa-solid fa-mobile-screen"></i> 
+                    <span><a href="#">Klik di sini</a> atau hubungi Posko untuk pembaruan.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-logo-text">KKN IDBU-04</div>
+            <div class="footer-socials">
+                <a href="#" title="X"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Logika Popup Modal Gabung KKN
+        const btnGabung = document.getElementById("btn-gabung");
+        const gabungModal = document.getElementById("gabung-modal");
+        const gabungOverlay = document.getElementById("gabung-overlay");
+        const closeModalBtn = document.getElementById("close-modal-btn");
+
+        btnGabung.addEventListener("click", () => {
+            gabungModal.classList.add("active");
+            gabungOverlay.classList.add("active");
+        });
+
+        closeModalBtn.addEventListener("click", () => {
+            gabungModal.classList.remove("active");
+            gabungOverlay.classList.remove("active");
+        });
+
+        gabungOverlay.addEventListener("click", () => {
+            gabungModal.classList.remove("active");
+            gabungOverlay.classList.remove("active");
+        });
+
+        // Logika Scroll (Header)
+        const header = document.getElementById("main-header");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) {
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
+            }
+        });
+
+        // Logika Pencarian
+        const searchToggle = document.getElementById("search-toggle");
+        const searchForm = document.getElementById("search-form");
+        const searchInput = document.getElementById("search-input");
+
+        searchToggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            searchToggle.style.display = "none";
+            searchForm.classList.add("active");
+            searchInput.focus(); 
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!searchForm.contains(e.target) && !searchToggle.contains(e.target)) {
+                searchForm.classList.remove("active");
+                searchToggle.style.display = "flex";
+            }
+        });
+
+        // === LOGIKA ANIMASI SCROLL UNTUK ARTIKEL (SMOOTH FADE IN UP) ===
+        const revealElements = document.querySelectorAll(".reveal-text");
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, {
+            rootMargin: "0px 0px -10% 0px",
+            threshold: 0.1,
+        });
+
+        revealElements.forEach((el) => {
+            revealObserver.observe(el);
+        });
+    </script>
+</body>
+</html>
