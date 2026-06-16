@@ -630,7 +630,7 @@
             <a href="laman-multidisiplin-2.html">MULTIDISIPLIN 2 <span>&#9656;</span></a>
             <a href="#">PRIORITAS PROKER <span>&#9656;</span></a>
             <a href="#">TENTANG KAMI <span>&#9656;</span></a>
-            <a href="#">TERLIBAT BERSAMA <span>&#9656;</span></a>
+            <a href="#" id="btn-open-map-link">PETA DESA DONOSARI <span>&#9656;</span></a>
           </div>
           <div class="mega-divider"></div>
           <div class="mega-col-sub">
@@ -741,6 +741,7 @@
       const agendaModal = document.getElementById("agenda-modal");
       const mapModal = document.getElementById("map-modal");
 const btnOpenMap = document.getElementById("btn-open-map");
+      const btnOpenMapLink = document.getElementById("btn-open-map-link");
 const closeMapBtn = document.getElementById("close-map-btn");
       const btnGabung = document.getElementById("btn-gabung");
       const btnAgenda = document.getElementById("btn-agenda");
@@ -779,8 +780,7 @@ const closeMapBtn = document.getElementById("close-map-btn");
         }
       });
 
-      // Buka Modal Peta dari Mega Menu
-      btnOpenMap.addEventListener("click", () => {
+      function openMapModal() {
         // Tutup mega menu dulu agar rapi
         header.classList.remove("menu-open");
         if(window.innerWidth > 900) menuText.textContent = "MENU";
@@ -790,6 +790,15 @@ const closeMapBtn = document.getElementById("close-map-btn");
         closeAllModals(); // Tutup modal lain jika ada
         mapModal.classList.add("active");
         gabungOverlay.classList.add("active");
+      }
+
+      // Klik Peta dari Kartu Gambar
+      btnOpenMap.addEventListener("click", openMapModal);
+
+      // Klik Peta dari Teks Tautan "PETA DESA DONOSARI"
+      btnOpenMapLink.addEventListener("click", (e) => {
+        e.preventDefault(); // Mencegah browser melompat ke atas
+        openMapModal();
       });
 
       // Buka Modal Gabung KKN (Kiri)
