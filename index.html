@@ -516,16 +516,17 @@
         </div>
 
         <div class="agenda-countdown">
-            <span class="highlight">25</span> hari menuju Penerjunan KKN
+            <span class="highlight">24</span> hari menuju Penerjunan KKN
         </div>
 
         <div class="agenda-month-nav">
-            <button class="nav-btn"><i class="fa-solid fa-chevron-left"></i></button>
-            <span class="current-month">Juli 2026</span>
-            <button class="nav-btn"><i class="fa-solid fa-chevron-right"></i></button>
+            <button class="nav-btn" id="prev-month-btn"><i class="fa-solid fa-chevron-left"></i></button>
+            <span class="current-month" id="month-label">Juli 2026</span>
+            <button class="nav-btn" id="next-month-btn"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
 
-        <div class="calendar-grid">
+        <!-- KALENDER JULI 2026 -->
+        <div class="calendar-grid" id="grid-juli">
             <div class="day-name">MING</div><div class="day-name">SEN</div><div class="day-name">SEL</div>
             <div class="day-name">RAB</div><div class="day-name">KAM</div><div class="day-name">JUM</div><div class="day-name">SAB</div>
             
@@ -542,6 +543,24 @@
             <div class="day active-day">30</div><div class="day active-day">31</div>
         </div>
 
+        <!-- KALENDER AGUSTUS 2026 (Awalnya Disembunyikan) -->
+        <div class="calendar-grid" id="grid-agustus" style="display: none;">
+            <div class="day-name">MING</div><div class="day-name">SEN</div><div class="day-name">SEL</div>
+            <div class="day-name">RAB</div><div class="day-name">KAM</div><div class="day-name">JUM</div><div class="day-name">SAB</div>
+            
+            <!-- Tanggal 1 Agustus 2026 itu hari Sabtu, jadi ada 6 kotak kosong di awal -->
+            <div class="day"></div><div class="day"></div><div class="day"></div>
+            <div class="day"></div><div class="day"></div><div class="day"></div>
+            
+            <div class="day active-day">1</div><div class="day active-day">2</div><div class="day active-day">3</div><div class="day active-day">4</div>
+            <div class="day active-day">5</div><div class="day active-day">6</div><div class="day active-day">7</div><div class="day active-day">8</div><div class="day active-day">9</div>
+            <div class="day active-day">10</div><div class="day active-day">11</div><div class="day active-day">12</div><div class="day active-day">13</div><div class="day active-day">14</div>
+            <div class="day active-day">15</div><div class="day active-day">16</div><div class="day active-day">17</div><div class="day active-day">18</div><div class="day active-day">19</div>
+            <div class="day active-day">20</div><div class="day active-day">21</div><div class="day active-day">22</div><div class="day active-day">23</div><div class="day active-day">24</div>
+            <div class="day active-day">25</div><div class="day active-day">26</div><div class="day active-day">27</div><div class="day active-day">28</div><div class="day active-day">29</div>
+            <div class="day active-day">30</div><div class="day active-day">31</div>
+        </div>
+      
         <h3 class="list-title">AGENDA KKN IDBU 04</h3>
         
         <!-- Pesan Placeholder Karena Agenda Dikosongkan -->
@@ -863,6 +882,41 @@ const closeMapBtn = document.getElementById("close-map-btn");
         }
       });
 
+      // === LOGIKA NAVIGASI BULAN AGENDA ===
+      const prevMonthBtn = document.getElementById("prev-month-btn");
+      const nextMonthBtn = document.getElementById("next-month-btn");
+      const monthLabel = document.getElementById("month-label");
+      const gridJuli = document.getElementById("grid-juli");
+      const gridAgustus = document.getElementById("grid-agustus");
+
+      let currentMonth = "Juli";
+
+      function updateCalendarView() {
+        if (currentMonth === "Juli") {
+          monthLabel.textContent = "Juli 2026";
+          gridJuli.style.display = "grid"; // Tampilkan Juli
+          gridAgustus.style.display = "none"; // Sembunyikan Agustus
+        } else {
+          monthLabel.textContent = "Agustus 2026";
+          gridJuli.style.display = "none"; // Sembunyikan Juli
+          gridAgustus.style.display = "grid"; // Tampilkan Agustus
+        }
+      }
+
+      nextMonthBtn.addEventListener("click", () => {
+        if (currentMonth === "Juli") {
+          currentMonth = "Agustus";
+          updateCalendarView();
+        }
+      });
+
+      prevMonthBtn.addEventListener("click", () => {
+        if (currentMonth === "Agustus") {
+          currentMonth = "Juli";
+          updateCalendarView();
+        }
+      });
+      
       // === LOGIKA ANIMASI SCROLL LOOPING ===
       const revealElements = document.querySelectorAll(".reveal-text");
 
