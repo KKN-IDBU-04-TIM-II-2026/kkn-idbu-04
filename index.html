@@ -562,7 +562,6 @@
         <h2 class="map-title">Peta Interaktif Donosari</h2>
         <p class="map-subtitle">Kecamatan Patebon, Kabupaten Kendal</p>
         <div class="map-image-container" style="height: 50vh; min-height: 350px;">
-            <!-- KODE GOOGLE MAPS IFRAME -->
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15842.104476643966!2d110.15491372701783!3d-6.947093419693112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e705d201b8d8e2f%3A0x400737546c92f652!2sDonosari%2C+Patebon%2C+Kabupaten+Kendal%2C+Jawa+Tengah!5e0!3m2!1sid!2sid!4v1554423239042!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <p class="map-desc">
@@ -643,10 +642,11 @@
               <img src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?q=80&w=800&auto=format&fit=crop" alt="Kegiatan Desa" />
               <div class="feature-caption">45 HARI PENGABDIAN</div>
             </div>
-            <div class="feature-card">
-              <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=800&auto=format&fit=crop" alt="Peta Desa" />
-              <div class="feature-caption">PETA RESMI DONOSARI</div>
-            </div>
+            <!-- Tombol trigger untuk membuka Peta -->
+<div class="feature-card" id="btn-open-map">
+  <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=800&auto=format&fit=crop" alt="Peta Desa" />
+  <div class="feature-caption">PETA RESMI DONOSARI</div>
+</div>
           </div>
         </div>
       </div>
@@ -739,6 +739,9 @@
       const gabungOverlay = document.getElementById("gabung-overlay");
       const gabungModal = document.getElementById("gabung-modal");
       const agendaModal = document.getElementById("agenda-modal");
+      const mapModal = document.getElementById("map-modal");
+const btnOpenMap = document.getElementById("btn-open-map");
+const closeMapBtn = document.getElementById("close-map-btn");
       const btnGabung = document.getElementById("btn-gabung");
       const btnAgenda = document.getElementById("btn-agenda");
       const closeModalBtn = document.getElementById("close-modal-btn");
@@ -776,6 +779,19 @@
         }
       });
 
+      // Buka Modal Peta dari Mega Menu
+      btnOpenMap.addEventListener("click", () => {
+        // Tutup mega menu dulu agar rapi
+        header.classList.remove("menu-open");
+        if(window.innerWidth > 900) menuText.textContent = "MENU";
+        menuIcon.innerHTML = '<div class="hamburger"><span></span><span></span><span></span></div>';
+        
+        // Buka modal peta
+        closeAllModals(); // Tutup modal lain jika ada
+        mapModal.classList.add("active");
+        gabungOverlay.classList.add("active");
+      });
+
       // Buka Modal Gabung KKN (Kiri)
       btnGabung.addEventListener("click", () => {
         agendaModal.classList.remove("active"); 
@@ -795,11 +811,13 @@
       function closeAllModals() {
           gabungModal.classList.remove("active");
           agendaModal.classList.remove("active");
+        mapModal.classList.remove("active"); // Tambahan penutup modal peta
           gabungOverlay.classList.remove("active");
       }
 
       closeModalBtn.addEventListener("click", closeAllModals);
       closeAgendaBtn.addEventListener("click", closeAllModals);
+      closeMapBtn.addEventListener("click", closeAllModals);
       gabungOverlay.addEventListener("click", closeAllModals);
 
       // Logika Scroll (Header State)
