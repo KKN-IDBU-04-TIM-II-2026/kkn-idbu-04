@@ -625,12 +625,6 @@
       </div>
     </div>
 
-    <!-- AUDIO INVISIBLE UNTUK LOBBY HOTEL -->
-    <audio id="bg-music" loop>
-        <!-- Pastikan file lagu ini sudah diupload dengan nama yang persis sama -->
-        <source src="lagu-kkn.mp3" type="audio/mpeg">
-    </audio>
-
     <!-- ELEMEN POPUP MODAL & OVERLAY BERSAMA -->
     <div class="modal-overlay" id="gabung-overlay"></div>
     
@@ -1088,21 +1082,6 @@ const closeMapBtn = document.getElementById("close-map-btn");
               document.body.classList.add('site-loaded');
           }, 4500); 
       });
-
-      // === LOGIKA MUSIK INVISIBLE ===
-      const bgMusic = document.getElementById("bg-music");
-      let isMusicPlaying = false;
-
-      // Musik akan otomatis terpicu begitu user klik layar di mana saja untuk pertama kalinya
-      document.body.addEventListener("click", () => {
-        if (!isMusicPlaying && bgMusic.paused) {
-            bgMusic.play().then(() => {
-                isMusicPlaying = true;
-            }).catch((err) => {
-                console.log("Autoplay dicegah oleh browser.");
-            });
-        }
-      }, { once: true });
     </script>
   </body>
 </html>
