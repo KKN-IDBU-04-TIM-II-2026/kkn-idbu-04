@@ -655,69 +655,165 @@
         </div>
 
         <div class="agenda-month-nav">
-            <button class="nav-btn" id="prev-month-btn"><i class="fa-solid fa-chevron-left"></i></button>
-            <span class="current-month" id="month-label">Juni 2026</span>
-            <button class="nav-btn" id="next-month-btn"><i class="fa-solid fa-chevron-right"></i></button>
-        </div>
+        <button class="nav-btn" id="prev-month-btn">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <span class="current-month" id="month-label">Juni 2026</span>
+        <button class="nav-btn" id="next-month-btn">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
 
-      <!-- KALENDER JUNI 2026 (Mulai Hari Senin) -->
-        <div class="calendar-grid">
-            <div class="day-name">MING</div><div class="day-name">SEN</div><div class="day-name">SEL</div>
-            <div class="day-name">RAB</div><div class="day-name">KAM</div><div class="day-name">JUM</div><div class="day-name">SAB</div>
-            
-            <!-- Tanggal Kosong / Beda Bulan (Minggu pertama kosong) -->
-            <div class="day"></div>
-            
-            <div class="day active-day">1</div><div class="day active-day">2</div><div class="day active-day">3</div><div class="day active-day">4</div><div class="day active-day">5</div><div class="day active-day">6</div>
-            <div class="day active-day">7</div><div class="day active-day">8</div>
-            <div class="day active-day mono">9<div class="event-dot"></div></div>
-            <div class="day active-day">10</div><div class="day active-day">11</div><div class="day active-day">12</div>
-            <div class="day active-day mono">13<div class="event-dot"></div></div>
-            <div class="day active-day">14</div><div class="day active-day">15</div><div class="day active-day">16</div><div class="day active-day">17</div><div class="day active-day">18</div><div class="day active-day">19</div>
-            <div class="day active-day mono">20<div class="event-dot"></div></div>
-            <div class="day active-day">21</div><div class="day active-day">22</div><div class="day active-day">23</div><div class="day active-day">24</div><div class="day active-day">25</div><div class="day active-day">26</div><div class="day active-day">27</div>
-            <div class="day active-day">28</div><div class="day active-day">29</div><div class="day active-day">30</div>
-        </div>
+      <div class="calendar-grid" id="grid-juni">
+        <div class="day-name">MING</div>
+        <div class="day-name">SEN</div>
+        <div class="day-name">SEL</div>
+        <div class="day-name">RAB</div>
+        <div class="day-name">KAM</div>
+        <div class="day-name">JUM</div>
+        <div class="day-name">SAB</div>
 
-        <!-- KALENDER JULI 2026 -->
-        <div class="calendar-grid" id="grid-juli">
-            <div class="day-name">MING</div><div class="day-name">SEN</div><div class="day-name">SEL</div>
-            <div class="day-name">RAB</div><div class="day-name">KAM</div><div class="day-name">JUM</div><div class="day-name">SAB</div>
-            
-            <!-- Tanggal Kosong / Beda Bulan -->
-            <div class="day"></div><div class="day"></div><div class="day"></div>
-            
-            <!-- Tanggal Juli 2026 -->
-            <div class="day active-day">1</div><div class="day active-day">2</div><div class="day active-day">3</div><div class="day active-day">4</div>
-            <div class="day active-day">5</div><div class="day active-day">6</div><div class="day active-day">7</div><div class="day active-day">8</div><div class="day active-day">9</div>
-            <div class="day active-day">10</div><div class="day active-day">11</div><div class="day active-day">12</div><div class="day active-day">13</div><div class="day active-day">14</div>
-            <div class="day active-day">15</div><div class="day active-day">16</div><div class="day active-day">17</div><div class="day active-day">18</div><div class="day active-day">19</div>
-            <div class="day active-day">20</div><div class="day active-day">21</div><div class="day active-day">22</div><div class="day active-day">23</div><div class="day active-day">24</div>
-            <div class="day active-day">25</div><div class="day active-day">26</div><div class="day active-day">27</div><div class="day active-day">28</div><div class="day active-day">29</div>
-            <div class="day active-day">30</div><div class="day active-day">31</div>
-        </div>
+        <div class="day"></div>
 
-        <!-- KALENDER AGUSTUS 2026 (Awalnya Disembunyikan) -->
-        <div class="calendar-grid" id="grid-agustus" style="display: none;">
-            <div class="day-name">MING</div><div class="day-name">SEN</div><div class="day-name">SEL</div>
-            <div class="day-name">RAB</div><div class="day-name">KAM</div><div class="day-name">JUM</div><div class="day-name">SAB</div>
-            
-            <!-- Tanggal 1 Agustus 2026 itu hari Sabtu, jadi ada 6 kotak kosong di awal -->
-            <div class="day"></div><div class="day"></div><div class="day"></div>
-            <div class="day"></div><div class="day"></div><div class="day"></div>
-            
-            <div class="day active-day">1</div><div class="day active-day">2</div><div class="day active-day">3</div><div class="day active-day">4</div>
-            <div class="day active-day">5</div><div class="day active-day">6</div><div class="day active-day">7</div><div class="day active-day">8</div><div class="day active-day">9</div>
-            <div class="day active-day">10</div><div class="day active-day">11</div><div class="day active-day">12</div><div class="day active-day">13</div><div class="day active-day">14</div>
-            <div class="day active-day">15</div><div class="day active-day">16</div><div class="day active-day">17</div><div class="day active-day">18</div><div class="day active-day">19</div>
-            <div class="day active-day">20</div><div class="day active-day">21</div><div class="day active-day">22</div><div class="day active-day">23</div><div class="day active-day">24</div>
-            <div class="day active-day">25</div><div class="day active-day">26</div><div class="day active-day">27</div><div class="day active-day">28</div><div class="day active-day">29</div>
-            <div class="day active-day">30</div><div class="day active-day">31</div>
+        <div class="day active-day">1</div>
+        <div class="day active-day">2</div>
+        <div class="day active-day">3</div>
+        <div class="day active-day">4</div>
+        <div class="day active-day">5</div>
+        <div class="day active-day">6</div>
+        <div class="day active-day">7</div>
+        <div class="day active-day">8</div>
+        <div class="day active-day mono">
+          9
+          <div class="event-dot"></div>
         </div>
-      
-        <h3 class="list-title">AGENDA KKN IDBU 04</h3>
-        
-        <div id="events-juni">
+        <div class="day active-day">10</div>
+        <div class="day active-day">11</div>
+        <div class="day active-day">12</div>
+        <div class="day active-day mono">
+          13
+          <div class="event-dot"></div>
+        </div>
+        <div class="day active-day">14</div>
+        <div class="day active-day">15</div>
+        <div class="day active-day">16</div>
+        <div class="day active-day">17</div>
+        <div class="day active-day">18</div>
+        <div class="day active-day">19</div>
+        <div class="day active-day mono">
+          20
+          <div class="event-dot"></div>
+        </div>
+        <div class="day active-day">21</div>
+        <div class="day active-day">22</div>
+        <div class="day active-day">23</div>
+        <div class="day active-day">24</div>
+        <div class="day active-day">25</div>
+        <div class="day active-day">26</div>
+        <div class="day active-day">27</div>
+        <div class="day active-day">28</div>
+        <div class="day active-day">29</div>
+        <div class="day active-day">30</div>
+      </div>
+
+      <div class="calendar-grid" id="grid-juli" style="display: none;">
+        <div class="day-name">MING</div>
+        <div class="day-name">SEN</div>
+        <div class="day-name">SEL</div>
+        <div class="day-name">RAB</div>
+        <div class="day-name">KAM</div>
+        <div class="day-name">JUM</div>
+        <div class="day-name">SAB</div>
+
+        <div class="day"></div>
+        <div class="day"></div>
+        <div class="day"></div>
+
+        <div class="day active-day">1</div>
+        <div class="day active-day">2</div>
+        <div class="day active-day">3</div>
+        <div class="day active-day">4</div>
+        <div class="day active-day">5</div>
+        <div class="day active-day">6</div>
+        <div class="day active-day">7</div>
+        <div class="day active-day">8</div>
+        <div class="day active-day">9</div>
+        <div class="day active-day">10</div>
+        <div class="day active-day">11</div>
+        <div class="day active-day">12</div>
+        <div class="day active-day">13</div>
+        <div class="day active-day">14</div>
+        <div class="day active-day">15</div>
+        <div class="day active-day">16</div>
+        <div class="day active-day">17</div>
+        <div class="day active-day">18</div>
+        <div class="day active-day">19</div>
+        <div class="day active-day">20</div>
+        <div class="day active-day">21</div>
+        <div class="day active-day">22</div>
+        <div class="day active-day">23</div>
+        <div class="day active-day">24</div>
+        <div class="day active-day">25</div>
+        <div class="day active-day">26</div>
+        <div class="day active-day">27</div>
+        <div class="day active-day">28</div>
+        <div class="day active-day">29</div>
+        <div class="day active-day">30</div>
+        <div class="day active-day">31</div>
+      </div>
+
+      <div class="calendar-grid" id="grid-agustus" style="display: none">
+        <div class="day-name">MING</div>
+        <div class="day-name">SEN</div>
+        <div class="day-name">SEL</div>
+        <div class="day-name">RAB</div>
+        <div class="day-name">KAM</div>
+        <div class="day-name">JUM</div>
+        <div class="day-name">SAB</div>
+
+        <div class="day"></div>
+        <div class="day"></div>
+        <div class="day"></div>
+        <div class="day"></div>
+        <div class="day"></div>
+        <div class="day"></div>
+
+        <div class="day active-day">1</div>
+        <div class="day active-day">2</div>
+        <div class="day active-day">3</div>
+        <div class="day active-day">4</div>
+        <div class="day active-day">5</div>
+        <div class="day active-day">6</div>
+        <div class="day active-day">7</div>
+        <div class="day active-day">8</div>
+        <div class="day active-day">9</div>
+        <div class="day active-day">10</div>
+        <div class="day active-day">11</div>
+        <div class="day active-day">12</div>
+        <div class="day active-day">13</div>
+        <div class="day active-day">14</div>
+        <div class="day active-day">15</div>
+        <div class="day active-day">16</div>
+        <div class="day active-day">17</div>
+        <div class="day active-day">18</div>
+        <div class="day active-day">19</div>
+        <div class="day active-day">20</div>
+        <div class="day active-day">21</div>
+        <div class="day active-day">22</div>
+        <div class="day active-day">23</div>
+        <div class="day active-day">24</div>
+        <div class="day active-day">25</div>
+        <div class="day active-day">26</div>
+        <div class="day active-day">27</div>
+        <div class="day active-day">28</div>
+        <div class="day active-day">29</div>
+        <div class="day active-day">30</div>
+        <div class="day active-day">31</div>
+      </div>
+
+      <h3 class="list-title">AGENDA KKN IDBU 04</h3>
+
+      <div id="events-juni">
         <div class="event-card">
             <span class="event-tag mono-tag">Umum</span>
             <h4>First Meet Tim KKN IDBU 04</h4>
