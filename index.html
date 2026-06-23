@@ -656,8 +656,27 @@
 
         <div class="agenda-month-nav">
             <button class="nav-btn" id="prev-month-btn"><i class="fa-solid fa-chevron-left"></i></button>
-            <span class="current-month" id="month-label">Juli 2026</span>
+            <span class="current-month" id="month-label">Juni 2026</span>
             <button class="nav-btn" id="next-month-btn"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+
+      <!-- KALENDER JUNI 2026 (Mulai Hari Senin) -->
+        <div class="calendar-grid">
+            <div class="day-name">MING</div><div class="day-name">SEN</div><div class="day-name">SEL</div>
+            <div class="day-name">RAB</div><div class="day-name">KAM</div><div class="day-name">JUM</div><div class="day-name">SAB</div>
+            
+            <!-- Tanggal Kosong / Beda Bulan (Minggu pertama kosong) -->
+            <div class="day"></div>
+            
+            <div class="day active-day">1</div><div class="day active-day">2</div><div class="day active-day">3</div><div class="day active-day">4</div><div class="day active-day">5</div><div class="day active-day">6</div>
+            <div class="day active-day">7</div><div class="day active-day">8</div>
+            <div class="day active-day mono">9<div class="event-dot"></div></div>
+            <div class="day active-day">10</div><div class="day active-day">11</div><div class="day active-day">12</div>
+            <div class="day active-day mono">13<div class="event-dot"></div></div>
+            <div class="day active-day">14</div><div class="day active-day">15</div><div class="day active-day">16</div><div class="day active-day">17</div><div class="day active-day">18</div><div class="day active-day">19</div>
+            <div class="day active-day mono">20<div class="event-dot"></div></div>
+            <div class="day active-day">21</div><div class="day active-day">22</div><div class="day active-day">23</div><div class="day active-day">24</div><div class="day active-day">25</div><div class="day active-day">26</div><div class="day active-day">27</div>
+            <div class="day active-day">28</div><div class="day active-day">29</div><div class="day active-day">30</div>
         </div>
 
         <!-- KALENDER JULI 2026 -->
@@ -698,10 +717,44 @@
       
         <h3 class="list-title">AGENDA KKN IDBU 04</h3>
         
-        <!-- Pesan Placeholder Karena Agenda Dikosongkan -->
+        <div id="events-juni">
+        <div class="event-card">
+            <span class="event-tag mono-tag">Umum</span>
+            <h4>First Meet Tim KKN IDBU 04</h4>
+            <div class="event-meta">
+                <span><i class="fa-regular fa-clock"></i> 9 Juni 2026</span>
+            </div>
+            <p class="event-desc">Pertemuan perdana, perkenalan tim, dan koordinasi awal untuk KKN di Desa Donosari.</p>
+        </div>
+        <div class="event-card">
+            <span class="event-tag mono-tag">Umum</span>
+            <h4>Pembekalan KKN</h4>
+            <div class="event-meta">
+                <span><i class="fa-regular fa-clock"></i> 13 Juni 2026</span>
+            </div>
+            <p class="event-desc">Kegiatan pembekalan oleh DPL (Dosen Pembimbing Lapangan) sebagai persiapan penerjunan ke lapangan.</p>
+        </div>
+        <div class="event-card">
+            <span class="event-tag mono-tag">Umum</span>
+            <h4>Rapat Pertama KKN</h4>
+            <div class="event-meta">
+                <span><i class="fa-regular fa-clock"></i> 20 Juni 2026</span>
+            </div>
+            <p class="event-desc">Pembahasan teknis program kerja dan pematangan Laporan Rencana Kegiatan (LRK).</p>
+        </div>
+      </div>
+
+      <div id="events-juli" style="display: none;">
         <p style="font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #666; text-align: center; margin: 30px 0; font-style: italic;">
-            Belum ada agenda yang dipublikasikan untuk bulan ini.
+          Belum ada agenda yang dipublikasikan untuk bulan ini.
         </p>
+      </div>
+
+      <div id="events-agustus" style="display: none;">
+        <p style="font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #666; text-align: center; margin: 30px 0; font-style: italic;">
+          Belum ada agenda yang dipublikasikan untuk bulan ini.
+        </p>
+      </div>
 
         <div class="agenda-legend">
             <div class="legend-item"><span class="legend-box c-mono"></span> Umum</div>
