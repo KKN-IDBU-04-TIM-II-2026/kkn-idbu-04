@@ -650,8 +650,8 @@
         <button class="close-agenda-btn" id="close-agenda-btn">×</button>
       </div>
 
-      <div class="agenda-countdown">
-        <span class="highlight">24</span> hari menuju Penerjunan KKN
+      <div class="agenda-countdown" id="realtime-countdown">
+        <span class="highlight">...</span> Menghitung waktu
       </div>
 
       <div class="agenda-month-nav">
@@ -1171,6 +1171,33 @@ const closeMapBtn = document.getElementById("close-map-btn");
           searchToggle.style.display = "flex";
         }
       });
+
+      // === LOGIKA COUNTDOWN OTOMATIS (REAL-TIME) ===
+      function updateCountdown() {
+        // Cari elemen HTML yang akan diubah teksnya
+        const countdownElement = document.getElementById("realtime-countdown");
+        if (!countdownElement) return;
+
+        // Atur tanggal target: 13 Juli 2026, jam 00:00 WIB
+        const targetDate = new Date("2026-07-13T00:00:00");
+        const currentDate = new Date(); // Ambil waktu hari ini secara real-time
+
+        // Hitung selisih waktunya menjadi format hari
+        const timeDiff = targetDate.getTime() - currentDate.getTime();
+        const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+        // Ubah teks berdasarkan kondisi hari ini
+        if (daysRemaining > 0) {
+          countdownElement.innerHTML = `<span class="highlight">${daysRemaining}</span> hari menuju Penerjunan KKN`;
+        } else if (daysRemaining === 0) {
+          countdownElement.innerHTML = `<span class="highlight">Hari Ini</span> Penerjunan KKN!`;
+        } else {
+          countdownElement.innerHTML = `Masa Pengabdian KKN <span class="highlight">Telah Dimulai</span>`;
+        }
+      }
+      
+      // Jalankan mesin perhitungannya segera saat web dibuka
+      updateCountdown();
 
       // === LOGIKA NAVIGASI 3 BULAN AGENDA ===
       const prevMonthBtn = document.getElementById("prev-month-btn");
