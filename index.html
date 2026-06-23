@@ -1172,29 +1172,52 @@ const closeMapBtn = document.getElementById("close-map-btn");
         }
       });
 
-      // === LOGIKA NAVIGASI BULAN AGENDA ===
+      // === LOGIKA NAVIGASI 3 BULAN AGENDA ===
       const prevMonthBtn = document.getElementById("prev-month-btn");
       const nextMonthBtn = document.getElementById("next-month-btn");
       const monthLabel = document.getElementById("month-label");
+      
+      const gridJuni = document.getElementById("grid-juni");
       const gridJuli = document.getElementById("grid-juli");
       const gridAgustus = document.getElementById("grid-agustus");
+      
+      const eventsJuni = document.getElementById("events-juni");
+      const eventsJuli = document.getElementById("events-juli");
+      const eventsAgustus = document.getElementById("events-agustus");
 
-      let currentMonth = "Juli";
+      let currentMonth = "Juni"; // Dimulai dari bulan Juni
 
       function updateCalendarView() {
-        if (currentMonth === "Juli") {
+        // Sembunyikan semuanya terlebih dahulu
+        gridJuni.style.display = "none";
+        gridJuli.style.display = "none";
+        gridAgustus.style.display = "none";
+        
+        eventsJuni.style.display = "none";
+        eventsJuli.style.display = "none";
+        eventsAgustus.style.display = "none";
+
+        // Tampilkan hanya yang sesuai dengan currentMonth
+        if (currentMonth === "Juni") {
+          monthLabel.textContent = "Juni 2026";
+          gridJuni.style.display = "grid";
+          eventsJuni.style.display = "block";
+        } else if (currentMonth === "Juli") {
           monthLabel.textContent = "Juli 2026";
-          gridJuli.style.display = "grid"; // Tampilkan Juli
-          gridAgustus.style.display = "none"; // Sembunyikan Agustus
-        } else {
+          gridJuli.style.display = "grid";
+          eventsJuli.style.display = "block";
+        } else if (currentMonth === "Agustus") {
           monthLabel.textContent = "Agustus 2026";
-          gridJuli.style.display = "none"; // Sembunyikan Juli
-          gridAgustus.style.display = "grid"; // Tampilkan Agustus
+          gridAgustus.style.display = "grid";
+          eventsAgustus.style.display = "block";
         }
       }
 
       nextMonthBtn.addEventListener("click", () => {
-        if (currentMonth === "Juli") {
+        if (currentMonth === "Juni") {
+          currentMonth = "Juli";
+          updateCalendarView();
+        } else if (currentMonth === "Juli") {
           currentMonth = "Agustus";
           updateCalendarView();
         }
@@ -1203,6 +1226,9 @@ const closeMapBtn = document.getElementById("close-map-btn");
       prevMonthBtn.addEventListener("click", () => {
         if (currentMonth === "Agustus") {
           currentMonth = "Juli";
+          updateCalendarView();
+        } else if (currentMonth === "Juli") {
+          currentMonth = "Juni";
           updateCalendarView();
         }
       });
